@@ -1,25 +1,39 @@
 package com.vivachicken.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String username;
 	private String password;
 	private Boolean estado;
-	private Integer id_cargo;
+	
+	@ManyToOne
+	private Cargo cargo;
 	
 
 	public Usuario() {
 	}
 	
-	public Usuario(Integer id, String username, String password, Boolean estado, Integer id_cargo) {
+	
+	public Usuario(Integer id, String username, String password, Boolean estado, Cargo cargo) {
+		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.estado = estado;
-		this.id_cargo = id_cargo;
+		this.cargo = cargo;
 	}
-	
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -44,18 +58,24 @@ public class Usuario {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
-	public Integer getIdCargo() {
-		return id_cargo;
+
+	public Cargo getCargo() {
+		return cargo;
 	}
-	public void setIdCargo(Integer idCargo) {
-		this.id_cargo = idCargo;
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
 	}
+
+
 
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", username=" + username + ", password=" + password + ", estado=" + estado
-				+ ", id_cargo=" + id_cargo + "]";
+				+ ", cargo=" + cargo + "]";
 	}
+
+
 	
 	
 }

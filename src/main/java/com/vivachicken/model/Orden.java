@@ -2,103 +2,118 @@ package com.vivachicken.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ordenes")
 public class Orden {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Integer id_detalle;
-	private Integer id_cliente;
 	private Date fecha;
 	private double subtotal;
 	private double igv;
 	private double totalFinal;
 	
-	private double total;
+	@ManyToOne
+	private Cliente cliente;
+	
+	@OneToOne(mappedBy = "orden")
+	private DetalleOrden detalle;
+
 	
 	public Orden() {
 	}
 
-	public Orden(Integer id, Integer id_detalle, Integer id_cliente, Date fecha, double subtotal, double igv,
-			double totalFinal, double total) {
 
+	public Orden(Integer id, Date fecha, double subtotal, double igv, double totalFinal, Cliente cliente,
+			DetalleOrden detalle) {
+		super();
 		this.id = id;
-		this.id_detalle = id_detalle;
-		this.id_cliente = id_cliente;
 		this.fecha = fecha;
 		this.subtotal = subtotal;
 		this.igv = igv;
 		this.totalFinal = totalFinal;
-		this.total = total;
+		this.cliente = cliente;
+		this.detalle = detalle;
 	}
+
 
 	public Integer getId() {
 		return id;
 	}
 
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Integer getId_detalle() {
-		return id_detalle;
-	}
-
-	public void setId_detalle(Integer id_detalle) {
-		this.id_detalle = id_detalle;
-	}
-
-	public Integer getId_cliente() {
-		return id_cliente;
-	}
-
-	public void setId_cliente(Integer id_cliente) {
-		this.id_cliente = id_cliente;
-	}
 
 	public Date getFecha() {
 		return fecha;
 	}
 
+
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+
 
 	public double getSubtotal() {
 		return subtotal;
 	}
 
+
 	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
 	}
+
 
 	public double getIgv() {
 		return igv;
 	}
 
+
 	public void setIgv(double igv) {
 		this.igv = igv;
 	}
+
 
 	public double getTotalFinal() {
 		return totalFinal;
 	}
 
+
 	public void setTotalFinal(double totalFinal) {
 		this.totalFinal = totalFinal;
 	}
 
-	public double getTotal() {
-		return total;
+
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setTotal(double total) {
-		this.total = total;
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
-	@Override
-	public String toString() {
-		return "Orden [id=" + id + ", id_detalle=" + id_detalle + ", id_cliente=" + id_cliente + ", fecha=" + fecha
-				+ ", subtotal=" + subtotal + ", igv=" + igv + ", totalFinal=" + totalFinal + ", total=" + total + "]";
+
+	public DetalleOrden getDetalle() {
+		return detalle;
 	}
-	
+
+
+	public void setDetalle(DetalleOrden detalle) {
+		this.detalle = detalle;
+	}
+
 	
 
 }

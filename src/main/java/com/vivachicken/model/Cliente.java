@@ -1,6 +1,20 @@
 package com.vivachicken.model;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "clientes")
 public class Cliente {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nombre;
 	private String apellido;
@@ -10,6 +24,9 @@ public class Cliente {
 	private String direccion;
 	private String dni;
 	private Boolean estado;
+	
+	@OneToMany(mappedBy = "cliente")
+	private List<Orden> ordenes;
 	
 	public Cliente() {
 

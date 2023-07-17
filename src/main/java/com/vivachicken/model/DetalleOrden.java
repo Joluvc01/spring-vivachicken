@@ -1,19 +1,37 @@
 package com.vivachicken.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "detalles")
 public class DetalleOrden {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Integer id_producto;
 	private double cantidad;
 	private double total;
+	
+	@OneToOne
+	private Orden orden;
+	
+	@OneToOne
+	private Producto productos;
 	
 	public DetalleOrden() {
 	}
 
-	public DetalleOrden(Integer id, int id_producto, double cantidad, double total) {
+	public DetalleOrden(Integer id, double cantidad, double total, Orden orden, Producto productos) {
+		super();
 		this.id = id;
-		this.id_producto = id_producto;
 		this.cantidad = cantidad;
 		this.total = total;
+		this.orden = orden;
+		this.productos = productos;
 	}
 
 	public Integer getId() {
@@ -22,14 +40,6 @@ public class DetalleOrden {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public int getId_producto() {
-		return id_producto;
-	}
-
-	public void setId_producto(int id_producto) {
-		this.id_producto = id_producto;
 	}
 
 	public double getCantidad() {
@@ -48,11 +58,27 @@ public class DetalleOrden {
 		this.total = total;
 	}
 
+	public Orden getOrden() {
+		return orden;
+	}
+
+	public void setOrden(Orden orden) {
+		this.orden = orden;
+	}
+
+	public Producto getProductos() {
+		return productos;
+	}
+
+	public void setProductos(Producto productos) {
+		this.productos = productos;
+	}
+
 	@Override
 	public String toString() {
-		return "DetalleOrden [id=" + id + ", id_producto=" + id_producto + ", cantidad=" + cantidad + ", total=" + total
-				+ "]";
+		return "DetalleOrden [id=" + id + ", cantidad=" + cantidad + ", total=" + total + ", orden=" + orden
+				+ ", productos=" + productos + "]";
 	}
-	
 
+	
 }

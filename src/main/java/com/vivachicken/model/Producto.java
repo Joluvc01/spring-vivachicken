@@ -1,29 +1,42 @@
 package com.vivachicken.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "productos")
 public class Producto {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Integer id_categoria;
 	private String imagen;
 	private String nombre;
 	private double precio;
 	private int stock;
 	private Boolean estado;
 	
+	@ManyToOne
+	private Categoria categoria;
 	
 	public Producto() {
 	}
 
-	public Producto(Integer id, Integer id_categoria, String imagen, String nombre, Double precio, Integer stock,
-			Boolean estado) {
+	public Producto(Integer id, String imagen, String nombre, double precio, int stock, Boolean estado,
+			Categoria categoria) {
+		super();
 		this.id = id;
-		this.id_categoria = id_categoria;
 		this.imagen = imagen;
 		this.nombre = nombre;
 		this.precio = precio;
 		this.stock = stock;
 		this.estado = estado;
+		this.categoria = categoria;
 	}
-	
+
 
 	public Integer getId() {
 		return id;
@@ -31,14 +44,6 @@ public class Producto {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Integer getIdCategoria() {
-		return id_categoria;
-	}
-
-	public void setIdCategoria(Integer id_categoria) {
-		this.id_categoria = id_categoria;
 	}
 
 	public String getImagen() {
@@ -57,19 +62,19 @@ public class Producto {
 		this.nombre = nombre;
 	}
 
-	public Double getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(Double precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 
-	public Integer getStock() {
+	public int getStock() {
 		return stock;
 	}
 
-	public void setStock(Integer stock) {
+	public void setStock(int stock) {
 		this.stock = stock;
 	}
 
@@ -81,13 +86,22 @@ public class Producto {
 		this.estado = estado;
 	}
 
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
 	@Override
 	public String toString() {
-		return "Producto [id=" + id + ", id_categoria=" + id_categoria + ", imagen=" + imagen + ", nombre=" + nombre
-				+ ", precio=" + precio + ", stock=" + stock + ", estado=" + estado + "]";
+		return "Producto [id=" + id + ", imagen=" + imagen + ", nombre=" + nombre + ", precio=" + precio + ", stock="
+				+ stock + ", estado=" + estado + ", categoria=" + categoria + "]";
 	}
 	
-	
+
+
 	
 	
 }
